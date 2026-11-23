@@ -47,6 +47,16 @@
   .quick { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
   code { background:#1d1710; padding:2px 6px; border-radius:6px; color:#cfe0ff; }
   pre { background:#0a0907; border:1px solid #3a2a14; border-radius:12px; padding:16px; overflow:auto; }
+  .player video { width:100%; border-radius:16px; border:1px solid #3a2a14; background:#0a0907; display:block; }
+  /* subtitle text: size is driven by --cap-size, set from the slider */
+  .player video::cue { font-size: var(--cap-size, 20px); line-height:1.3; color:#fbf3e4; background:rgba(0,0,0,.78); }
+  .vbar { display:flex; flex-wrap:wrap; gap:12px 20px; align-items:center; margin-top:14px; color:var(--muted); }
+  .vbar button { background:#1d1710; color:var(--ink); border:1px solid #4a3618; padding:9px 14px; border-radius:10px; cursor:pointer; font-weight:600; }
+  .vbar button[aria-pressed="true"] { background:var(--accent); color:#0b1020; border-color:var(--accent); }
+  .vbar label { display:flex; align-items:center; gap:8px; }
+  .vbar input[type=range] { width:140px; accent-color:var(--accent); }
+  .vbar a.dl { color:var(--ink); border:1px solid #4a3618; padding:7px 12px; border-radius:10px; margin-left:4px; }
+  .vbar a.dl:hover { border-color:var(--accent); }
   footer { color:var(--muted); text-align:center; padding:40px 0 60px; border-top:1px solid #3a2a14; margin-top:40px; }
   @media (max-width:820px) { .grid3,.quick { grid-template-columns:1fr; } .flow { grid-template-columns:1fr 1fr; } }
 </style>
@@ -84,10 +94,25 @@ Lodestar</div>
 
   <section id="demo">
     <h2>See it in action</h2>
-    <p class="sub">A 49-second demo, recorded from the live dashboard and the real hook output. Subtitles included.</p>
-    <video controls preload="metadata" poster="media/dashboard.png" style="width:100%;border-radius:16px;border:1px solid #3a2a14;background:#0a0907">
-      <source src="media/lodestar-explainer.mp4" type="video/mp4">
-    </video>
+    <p class="sub">A 98-second narrated walkthrough, recorded from the live dashboard and the real hook output. Subtitles are off by default.</p>
+    <div class="player">
+      <video id="vid" controls preload="metadata" poster="media/dashboard.png">
+        <source src="media/lodestar-explainer.mp4?v=2" type="video/mp4">
+        <track id="trk" kind="subtitles" srclang="en" label="English" src="media/lodestar-explainer.vtt?v=2">
+      </video>
+    </div>
+    <div class="vbar">
+      <button id="ccBtn" type="button" aria-pressed="false">CC · Subtitles off</button>
+      <label>Text size
+        <input id="fs" type="range" min="14" max="40" step="1" value="20" aria-label="Subtitle text size">
+        <span id="fsv">20px</span>
+      </label>
+      <span>Download:
+        <a class="dl" href="media/lodestar-explainer.mp4?v=2" download>MP4</a>
+        <a class="dl" href="media/lodestar-explainer.srt?v=2" download>SRT</a>
+        <a class="dl" href="media/lodestar-explainer.vtt?v=2" download>VTT</a>
+      </span>
+    </div>
   </section>
 
   <div class="grid3">
@@ -188,6 +213,44 @@ buttons.forEach((b, i) => b.addEventListener('click', () => show(i)));
 show(0);
 let auto = 0;
 setInterval(() => { auto = (auto + 1) % steps.length; show(auto); }, 9000);
+
+// Demo video: subtitles off by default, toggle and size remembered per browser.
+(() => {
+  const vid = document.getElementById('vid');
+  const trk = document.getElementById('trk');
+  const ccBtn = document.getElementById('ccBtn');
+  const fs = document.getElementById('fs');
+  const fsv = document.getElementById('fsv');
+  const saved = JSON.parse(localStorage.getItem('lodestarCaptions') || '{}');
+  let on = saved.on === true;
+  let size = Number(saved.size) || 20;
+
+  // 'hidden' keeps cues loaded without drawing them; 'showing' draws them.
+  function applyTrack() {
+    const tt = trk.track || vid.textTracks[0];
+    if (tt) tt.mode = on ? 'showing' : 'hidden';
+    ccBtn.textContent = on ? 'CC · Subtitles on' : 'CC · Subtitles off';
+    ccBtn.setAttribute('aria-pressed', String(on));
+  }
+  function applySize(px) {
+    size = px;
+    vid.style.setProperty('--cap-size', px + 'px');
+    fs.value = px;
+    fsv.textContent = px + 'px';
+  }
+  function save() {
+    localStorage.setItem('lodestarCaptions', JSON.stringify({ on, size }));
+  }
+
+  ccBtn.addEventListener('click', () => { on = !on; applyTrack(); save(); });
+  fs.addEventListener('input', () => { applySize(Number(fs.value)); save(); });
+
+  applySize(size);
+  // Cues load asynchronously, so set the mode once the track exists.
+  if (trk.track) applyTrack(); else trk.addEventListener('load', applyTrack);
+  vid.addEventListener('loadedmetadata', applyTrack);
+  applyTrack();
+})();
 </script>
 </body>
 </html>
