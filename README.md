@@ -62,9 +62,9 @@ Risky shell commands pause for confirmation: recursive delete, force push, hard 
 
 ## 🎬 See it in action
 
-[![Watch the 49-second demo](docs/media/dashboard.png)](docs/media/lodestar-explainer.mp4)
+[![Watch the 49-second demo](docs/media/dashboard.png)](https://github.com/AdarshSingh7647/lodestar-agent/releases/download/media-latest/lodestar-explainer.mp4)
 
-> ▶️ **[Watch the 49-second demo](docs/media/lodestar-explainer.mp4)** · subtitles included · recorded from the live dashboard and real hook output
+> ▶️ **[Watch the 49-second demo](https://github.com/AdarshSingh7647/lodestar-agent/releases/download/media-latest/lodestar-explainer.mp4)** · subtitles included · recorded from the live dashboard and real hook output
 
 ```text
 [Stop] ❌ verifier failed (round 1/5)
