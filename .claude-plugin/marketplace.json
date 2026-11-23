@@ -1,0 +1,14 @@
+{
+  "name": "smart-agent-manager-local",
+  "description": "Local marketplace for the Smart Agent Manager plugin",
+  "owner": {
+    "name": "local-dev"
+  },
+  "plugins": [
+    {
+      "name": "smart-agent-manager",
+      "source": "./plugin",
+      "description": "Persistent memory, approval policy and verification gate for Claude Code"
+    }
+  ]
+}
