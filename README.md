@@ -1,16 +1,18 @@
 <div align="center">
 
-# 🧭 Lodestar
+<img src="assets/lodestar-hat.svg" width="150" alt="Lodestar straw hat logo"/>
+
+# Lodestar
 
 ### *The guiding star for your coding agents.*
 
 Persistent memory · an honest verification gate · an approval policy for risky commands
 
 [![Tests](https://img.shields.io/badge/tests-26%20passing-brightgreen?style=for-the-badge)](#-verify-it-yourself)
-[![Claude Code](https://img.shields.io/badge/Claude%20Code-plugin-D97757?style=for-the-badge)](#-quick-start)
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-plugin-E9B872?style=for-the-badge)](#-quick-start)
 [![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](#-quick-start)
 [![Zero deps](https://img.shields.io/badge/dependencies-zero-success?style=for-the-badge)](#-how-it-works)
-[![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)](LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-D7263D?style=for-the-badge)](LICENSE)
 
 [🌐 **Website**](https://harness.adarsh.fun) · [🚀 **Quick start**](#-quick-start) · [🧪 **Trial results**](#-trial-results) · [🗺️ **Roadmap**](#%EF%B8%8F-roadmap)
 
@@ -60,9 +62,9 @@ Risky shell commands pause for confirmation: recursive delete, force push, hard 
 
 ## 🎬 See it in action
 
-[![Watch the 49-second demo](docs/media/dashboard.png)](docs/media/lodestar-demo.mp4)
+[![Watch the 49-second demo](docs/media/dashboard.png)](docs/media/lodestar-explainer.mp4)
 
-> ▶️ **[Watch the 49-second demo](docs/media/lodestar-demo.mp4)** · subtitles included · recorded from the live dashboard and real hook output
+> ▶️ **[Watch the 49-second demo](docs/media/lodestar-explainer.mp4)** · subtitles included · recorded from the live dashboard and real hook output
 
 ```text
 [Stop] ❌ verifier failed (round 1/5)
