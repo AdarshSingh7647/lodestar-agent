@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 180" width="640" height="180">
+  <g transform="translate(10,15) scale(0.6)">
+    <ellipse cx="100" cy="100" rx="96" ry="24" fill="#E9B872" stroke="#8A5A21" stroke-width="2.5"/>
+    <path d="M46 100 C44 52 70 26 100 26 C130 26 156 52 154 100 Z" fill="#F4CB8C" stroke="#8A5A21" stroke-width="2.5"/>
+    <path d="M46 78 Q100 94 154 78 L154 96 Q100 112 46 96 Z" fill="#D7263D" stroke="#8A1B2A" stroke-width="2"/>
+  </g>
+  <text x="200" y="110" font-family="Segoe UI, Arial, sans-serif" font-size="78" font-weight="800" fill="#E9B872">Lodestar</text>
+  <text x="203" y="145" font-family="Segoe UI, Arial, sans-serif" font-size="24" fill="#D7263D">the guiding layer for your agents</text>
+</svg>

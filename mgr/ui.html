@@ -9,9 +9,20 @@ td,th{border-bottom:1px solid #e5e5e5;padding:6px;text-align:left;vertical-align
 .open{background:#dbeafe}.done,.done_unverified{background:#dcfce7}.needs_human{background:#fee2e2}
 button{cursor:pointer;margin:2px}input{padding:4px;margin:2px}
 pre{white-space:pre-wrap;margin:0;font-size:12px}
+
+  /* Lodestar theme: black, straw and red */
+  body { background:#0b0b0b !important; color:#fbf3e4 !important; font-family:system-ui,"Segoe UI",sans-serif; }
+  h1,h2 { color:#E9B872 !important; border-color:#3a2a14 !important; }
+  h1 { font-size:2.2rem; }
+  table { color:#fbf3e4; } td,th { border-color:#3a2a14 !important; }
+  input,button { background:#17130f !important; color:#fbf3e4 !important; border:1px solid #5a4422 !important; border-radius:8px; padding:6px 10px; }
+  button:hover { background:#E9B872 !important; color:#0b0b0b !important; }
+  .tag,.open,.done,.needs_human { color:#0b0b0b; }
+  .done { background:#7bd88f !important; } .open { background:#E9B872 !important; } .needs_human { background:#D7263D !important; color:#fff !important; }
+  pre { color:#F4CB8C; }
 </style></head>
 <body>
-<h1>🧭 Lodestar</h1>
+<h1 style="display:flex;align-items:center;gap:12px"><svg viewBox="0 0 200 150" width="48" height="36"><ellipse cx="100" cy="100" rx="96" ry="24" fill="#E9B872" stroke="#8A5A21" stroke-width="3"/><path d="M46 100C44 52 70 26 100 26C130 26 156 52 154 100Z" fill="#F4CB8C" stroke="#8A5A21" stroke-width="3"/><path d="M46 78Q100 94 154 78L154 96Q100 112 46 96Z" fill="#D7263D"/></svg>Lodestar</h1>
 <div id="status">connecting...</div>
 
 <h2>Batch questions</h2>
