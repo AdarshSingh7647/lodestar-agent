@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lodestar · The guiding star for your coding agents</title>
+<meta name="description" content="Lodestar gives Claude Code persistent memory, an honest verification gate and an approval policy for risky commands.">
+<style>
+  :root { --bg:#0b1020; --panel:#121a33; --ink:#e8ecff; --muted:#9aa6d1; --accent:#7c9cff; --ok:#4ade80; --bad:#f87171; --gold:#fbbf24; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background:radial-gradient(1200px 600px at 70% -10%, #1d2a5a 0%, var(--bg) 60%); color:var(--ink); line-height:1.5; }
+  a { color:var(--accent); text-decoration:none; }
+  .wrap { max-width:1080px; margin:0 auto; padding:0 24px; }
+  nav { display:flex; justify-content:space-between; align-items:center; padding:20px 0; }
+  .brand { font-weight:800; letter-spacing:.3px; font-size:1.1rem; }
+  .pill { border:1px solid #2b3a6e; padding:8px 14px; border-radius:999px; color:var(--ink); }
+  .hero { text-align:center; padding:56px 0 36px; }
+  .hero h1 { font-size:clamp(2.2rem,5vw,3.6rem); margin:.2em 0; letter-spacing:-.5px; }
+  .hero h1 span { background:linear-gradient(90deg,var(--accent),var(--gold)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .hero p { color:var(--muted); font-size:1.15rem; max-width:680px; margin:0 auto; }
+  .cta { display:flex; gap:12px; justify-content:center; margin:26px 0 8px; flex-wrap:wrap; }
+  .btn { padding:13px 22px; border-radius:12px; font-weight:700; border:1px solid transparent; cursor:pointer; font-size:1rem; }
+  .btn.primary { background:var(--accent); color:#0b1020; }
+  .btn.ghost { background:transparent; color:var(--ink); border-color:#2b3a6e; }
+  .grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:34px 0; }
+  .card { background:var(--panel); border:1px solid #1f2b55; border-radius:16px; padding:22px; }
+  .card .ico { font-size:1.8rem; }
+  .card h3 { margin:.4em 0 .3em; }
+  .card p { color:var(--muted); margin:0; }
+  section { margin:56px 0; }
+  section h2 { font-size:1.6rem; margin-bottom:6px; }
+  .sub { color:var(--muted); margin-top:0; }
+  /* animated walkthrough */
+  .walk { background:var(--panel); border:1px solid #1f2b55; border-radius:16px; padding:22px; }
+  .steps { display:flex; gap:10px; margin-bottom:16px; flex-wrap:wrap; }
+  .steps button { background:#0e1630; color:var(--muted); border:1px solid #223266; padding:9px 14px; border-radius:10px; cursor:pointer; font-weight:600; }
+  .steps button.on { color:#0b1020; background:var(--accent); border-color:var(--accent); }
+  .term { background:#070b18; border-radius:12px; padding:18px; min-height:160px; font-family: ui-monospace, Consolas, monospace; font-size:.95rem; white-space:pre-wrap; border:1px solid #1a2550; }
+  .term .ok { color:var(--ok); } .term .bad { color:var(--bad); } .term .mut { color:var(--muted); } .term .gold { color:var(--gold); }
+  .fade { animation: fadeIn .6s ease; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(6px);} to { opacity:1; transform:none; } }
+  .flow { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:12px; }
+  .flow div { background:#0e1630; border:1px solid #223266; border-radius:12px; padding:14px; text-align:center; font-weight:600; }
+  .flow div small { display:block; color:var(--muted); font-weight:400; margin-top:4px; }
+  .honest { border-left:4px solid var(--gold); padding:12px 16px; background:#1a1a0d; border-radius:8px; color:#f5e7b5; }
+  .quick { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+  code { background:#0e1630; padding:2px 6px; border-radius:6px; color:#cfe0ff; }
+  pre { background:#070b18; border:1px solid #1a2550; border-radius:12px; padding:16px; overflow:auto; }
+  footer { color:var(--muted); text-align:center; padding:40px 0 60px; border-top:1px solid #1a2550; margin-top:40px; }
+  @media (max-width:820px) { .grid3,.quick { grid-template-columns:1fr; } .flow { grid-template-columns:1fr 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav>
+    <div class="brand">🧭 Lodestar</div>
+    <a class="pill" href="https://github.com/AdarshSingh7647/lodestar-agent">GitHub ↗</a>
+  </nav>
+
+  <header class="hero">
+    <h1>The guiding star for <span>your coding agents</span></h1>
+    <p>Lodestar remembers your rules, won't let an agent say "done" until the tests pass, and pauses before risky commands. It runs locally, inside Claude Code.</p>
+    <div class="cta">
+      <a class="btn primary" href="#start">🚀 Get started</a>
+      <a class="btn ghost" href="#how">🎬 How it works</a>
+      <a class="btn ghost" href="https://github.com/AdarshSingh7647/lodestar-agent">📦 Source code</a>
+    </div>
+  </header>
+
+  <div class="grid3">
+    <div class="card"><div class="ico">🧠</div><h3>Remembers</h3><p>"Always use pathlib" is stored once and injected into every future session in that project.</p></div>
+    <div class="card"><div class="ico">🚦</div><h3>Verifies</h3><p>A task can't finish while the project's own checks fail. The real failure goes back to the agent.</p></div>
+    <div class="card"><div class="ico">🛡️</div><h3>Asks first</h3><p>Recursive deletes, force pushes and hard resets pause for your confirmation.</p></div>
+  </div>
+
+  <section id="start">
+    <h2>Start in three steps</h2>
+    <p class="sub">Pick a step to see the walkthrough play out.</p>
+    <div class="walk">
+      <div class="steps" id="steps">
+        <button class="on" data-i="0">1 · Install</button>
+        <button data-i="1">2 · Turn it on</button>
+        <button data-i="2">3 · Watch it work</button>
+      </div>
+      <div class="term fade" id="term"></div>
+    </div>
+  </section>
+
+  <section id="how">
+    <h2>How it works</h2>
+    <p class="sub">Lodestar plugs into Claude Code's hooks. No cloud account, no stored credentials.</p>
+    <div class="flow">
+      <div>✍️ You prompt<small>Claude Code</small></div>
+      <div>🧠 Memory<small>rules injected</small></div>
+      <div>🚦 Gate<small>checks on stop</small></div>
+      <div>✅ Done<small>only when verified</small></div>
+    </div>
+    <div class="honest" style="margin-top:18px">
+      <strong>Honest results so far.</strong> On a planning task, a plain agent was faster and cheaper. Lodestar's gate caught a real defect the plain agent left behind. We will publish results on failing tasks next.
+    </div>
+  </section>
+
+  <section>
+    <h2>Quick start</h2>
+    <div class="quick">
+      <div class="card">
+        <h3>1 · Clone and install</h3>
+        <pre>git clone https://github.com/AdarshSingh7647/lodestar-agent
+cd lodestar-agent
+python -m mgr.cli install --register</pre>
+      </div>
+      <div class="card">
+        <h3>2 · Use it in Claude Code</h3>
+        <pre>/manager on        start the dashboard
+/manager tasks     see verification rounds
+/manager remember  store a rule
+/manager off       stop</pre>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div>🧭 Lodestar · MIT License · Built by Aman Singh and Adarsh Singh</div>
+  <div style="margin-top:6px"><a href="https://github.com/AdarshSingh7647/lodestar-agent">github.com/AdarshSingh7647/lodestar-agent</a></div>
+</footer>
+
+<script>
+const steps = [
+  { title: "Install", lines: [
+    ['$ git clone https://github.com/AdarshSingh7647/lodestar-agent', 'mut'],
+    ['$ cd lodestar-agent', 'mut'],
+    ['$ python -m mgr.cli install --register', 'gold'],
+    ['✔ Plugin registered with your Claude Code', 'ok'],
+  ]},
+  { title: "Turn it on", lines: [
+    ['> /manager on', 'gold'],
+    ['✔ Lodestar running · dashboard: http://127.0.0.1:8765', 'ok'],
+    ['> Always use pathlib for file paths.', 'mut'],
+    ['✔ Remembered for this project.', 'ok'],
+  ]},
+  { title: "Watch it work", lines: [
+    ['[Stop] ❌ verifier failed (round 1/5)', 'bad'],
+    ['       AssertionError: -1 != 5', 'bad'],
+    ['[Stop] ✅ verification passed for task #1', 'ok'],
+  ]},
+];
+const term = document.getElementById('term');
+const buttons = [...document.querySelectorAll('#steps button')];
+function show(i) {
+  buttons.forEach((b, k) => b.classList.toggle('on', k === i));
+  term.innerHTML = '';
+  term.classList.remove('fade'); void term.offsetWidth; term.classList.add('fade');
+  steps[i].lines.forEach(([text, cls], n) => {
+    setTimeout(() => {
+      const line = document.createElement('div');
+      line.className = cls;
+      line.textContent = text;
+      term.appendChild(line);
+    }, 350 * n);
+  });
+}
+buttons.forEach((b, i) => b.addEventListener('click', () => show(i)));
+show(0);
+let auto = 0;
+setInterval(() => { auto = (auto + 1) % steps.length; show(auto); }, 9000);
+</script>
+</body>
+</html>

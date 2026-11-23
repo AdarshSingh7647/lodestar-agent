@@ -1,4 +1,4 @@
-# Pitch package (working name: Smart Agent Manager; final name pending)
+# Pitch package (working name: Lodestar; final name pending)
 
 Status: draft for hackathon submission. Items marked PENDING are not done yet.
 

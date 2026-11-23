@@ -142,7 +142,7 @@ def cmd_tasks(a):
 
 
 def main(argv=None):
-    p = argparse.ArgumentParser(prog="mgr", description="Smart Agent Manager")
+    p = argparse.ArgumentParser(prog="mgr", description="Lodestar")
     sub = p.add_subparsers(dest="cmd", required=True)
 
     i = sub.add_parser("install", help="write config and optionally register the Claude Code plugin")

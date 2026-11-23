@@ -1,6 +1,6 @@
 {
   "name": "smart-agent-manager-local",
-  "description": "Local marketplace for the Smart Agent Manager plugin",
+  "description": "Local marketplace for the Lodestar plugin",
   "owner": {
     "name": "local-dev"
   },

@@ -60,7 +60,7 @@ def make_server(port, token, mgr: Manager):
                     out = mgr.handle(path[len("/hook/"):], payload)
                 except Exception as e:  # fail open: a manager bug must never wedge Claude Code
                     mgr.s.event("hook_error", {"event": path, "error": repr(e)})
-                    out = {"systemMessage": f"Smart Agent Manager error (hook skipped): {e!r}"}
+                    out = {"systemMessage": f"Lodestar error (hook skipped): {e!r}"}
                 return self._send(200, out or {})
             if path == "/api/questions":
                 return self._send(200, {"ids": mgr.enqueue_questions(payload.get("batch", "batch"),
@@ -90,7 +90,7 @@ def main():
         print(f"cannot bind 127.0.0.1:{cfg['port']}: {e}", file=sys.stderr)
         return 1
     (home() / "daemon.pid").write_text(str(os.getpid()), encoding="utf-8")
-    print(f"Smart Agent Manager listening on http://127.0.0.1:{cfg['port']}", flush=True)
+    print(f"Lodestar listening on http://127.0.0.1:{cfg['port']}", flush=True)
     try:
         srv.serve_forever()
     finally:
