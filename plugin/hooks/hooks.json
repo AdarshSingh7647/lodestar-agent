@@ -1,5 +1,5 @@
 {
-  "description": "Smart Agent Manager: memory injection, approval policy and verification gate",
+  "description": "Lodestar: memory injection, approval policy and verification gate",
   "hooks": {
     "SessionStart": [
       {

@@ -94,7 +94,7 @@ class Manager:
         parts = []
         mems = self.mem.retrieve(cwd)
         if mems:
-            parts.append("Smart Agent Manager memory for this project:\n" + Memory.format(mems))
+            parts.append("Lodestar memory for this project:\n" + Memory.format(mems))
         open_ = self.open_tasks(cwd)
         if open_:
             t = open_[0]
@@ -118,11 +118,11 @@ class Manager:
                 self.s.event("memory_captured", {"id": mid, "new": new, "text": rule[:200]})
             if not TASK_VERB.search(prompt):
                 # Pure preference or correction: remember it, do not open a verifiable task.
-                text = "Smart Agent Manager: remembered this as a standing rule for this project."
+                text = "Lodestar: remembered this as a standing rule for this project."
                 return _ctx("UserPromptSubmit", text)
         task, how = self.match_or_create_task(cwd, prompt)
         self.s.event("prompt", {"task": task["id"], "how": how, "text": prompt[:300]}, task_id=task["id"])
-        text = (f"Smart Agent Manager: task #{task['id']} ({how}), verification round "
+        text = (f"Lodestar: task #{task['id']} ({how}), verification round "
                 f"{task['rounds']}/{task['max_rounds']}. The task is complete only when the verifier passes.")
         mems = self.mem.retrieve(cwd, prompt, limit=5, budget_chars=800)
         if mems:
@@ -138,7 +138,7 @@ class Manager:
         return {"hookSpecificOutput": {
             "hookEventName": "PreToolUse",
             "permissionDecision": "ask",
-            "permissionDecisionReason": f"Smart Agent Manager policy: {label}. Confirm this is intended.",
+            "permissionDecisionReason": f"Lodestar policy: {label}. Confirm this is intended.",
         }}
 
     def _post_tool(self, p):
@@ -157,7 +157,7 @@ class Manager:
         tid, max_rounds = t["id"], t["max_rounds"]
         if t["rounds"] >= max_rounds:
             self._finish(tid, "needs_human", "verification budget exhausted")
-            return {"systemMessage": f"Smart Agent Manager: task #{tid} still fails verification after "
+            return {"systemMessage": f"Lodestar: task #{tid} still fails verification after "
                                      f"{max_rounds} rounds. Stopping for human review."}
 
         res = verifier.run(cwd)
@@ -171,15 +171,15 @@ class Manager:
                 f"Task: {t['title']}\nAgent's last message:\n{(p.get('last_assistant_message') or '')[:4000]}")
             if verdict.strip().upper().startswith("PASS"):
                 self._finish(tid, "done", "passed by model verifier (no automated check)")
-                return {"systemMessage": f"Smart Agent Manager: task #{tid} passed model verification "
+                return {"systemMessage": f"Lodestar: task #{tid} passed model verification "
                                          "(no automated checks configured)."}
             self._finish(tid, "done_unverified", "no automated check and model did not pass")
-            return {"systemMessage": f"Smart Agent Manager: no automated verification for task #{tid}; "
+            return {"systemMessage": f"Lodestar: no automated verification for task #{tid}; "
                                      "marked done_unverified. Add .mgr.json with a 'verify' command."}
 
         if res["passed"]:
             self._finish(tid, "done", "verified: " + res["command"])
-            return {"systemMessage": f"Smart Agent Manager: verification passed for task #{tid} "
+            return {"systemMessage": f"Lodestar: verification passed for task #{tid} "
                                      f"(`{res['command']}`)."}
 
         rounds = t["rounds"] + 1
@@ -187,9 +187,9 @@ class Manager:
                  (rounds, res["output"][-1500:], time.time(), tid))
         if rounds >= max_rounds:
             self._finish(tid, "needs_human", "verification failed on final round")
-            return {"systemMessage": f"Smart Agent Manager: task #{tid} failed verification {rounds} times. "
+            return {"systemMessage": f"Lodestar: task #{tid} failed verification {rounds} times. "
                                      "Stopping for human review."}
-        reason = (f"Smart Agent Manager verifier failed (round {rounds}/{max_rounds}). "
+        reason = (f"Lodestar verifier failed (round {rounds}/{max_rounds}). "
                   f"`{res['command']}` exited with code {res['returncode']}. "
                   f"Fix the failures, then finish again.\n\n{res['output'][-1500:]}")
         return {"decision": "block", "reason": reason}

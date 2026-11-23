@@ -57,7 +57,7 @@ def main(argv):
     try:
         cfg = load_cfg()
     except (OSError, ValueError):
-        print("Smart Agent Manager is not installed. Run: python -m mgr.cli install", file=sys.stderr)
+        print("Lodestar is not installed. Run: python -m mgr.cli install", file=sys.stderr)
         return 0
 
     if argv[0] == "cli":
@@ -79,12 +79,12 @@ def main(argv):
             out = post(cfg, f"/hook/{event}", payload, timeout)
         except urllib.error.URLError as e:
             if not isinstance(e.reason, ConnectionRefusedError):
-                print(f"Smart Agent Manager hook failed: {e.reason}", file=sys.stderr)
+                print(f"Lodestar hook failed: {e.reason}", file=sys.stderr)
                 return 0
         except ConnectionRefusedError:
             pass
         except OSError as e:
-            print(f"Smart Agent Manager hook failed: {e}", file=sys.stderr)
+            print(f"Lodestar hook failed: {e}", file=sys.stderr)
             return 0
         else:
             if out:
@@ -93,7 +93,7 @@ def main(argv):
         if attempt == 0:
             spawn_daemon(cfg)
         time.sleep(0.5)
-    print("Smart Agent Manager daemon unreachable; continuing without it.", file=sys.stderr)
+    print("Lodestar daemon unreachable; continuing without it.", file=sys.stderr)
     return 0
 
 

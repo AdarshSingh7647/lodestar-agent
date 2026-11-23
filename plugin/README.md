@@ -1,4 +1,4 @@
-# Smart Agent Manager (Claude Code plugin)
+# Lodestar (Claude Code plugin)
 
 Adds persistent memory, an approval policy for risky shell commands, and a verification gate to Claude Code. A task is marked done only after the project's own checks pass.
 

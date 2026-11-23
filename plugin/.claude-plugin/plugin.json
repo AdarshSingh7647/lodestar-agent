@@ -3,6 +3,6 @@
   "description": "Persistent memory, approval policy and an independent verification gate for Claude Code. Controlled with /manager.",
   "version": "0.1.0",
   "author": {
-    "name": "Smart Agent Manager contributors"
+    "name": "Lodestar contributors"
   }
 }
